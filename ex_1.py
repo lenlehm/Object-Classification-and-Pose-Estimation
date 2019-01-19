@@ -314,12 +314,13 @@ for i in range(iterations):
 
 #https://github.com/jireh-father/tensorflow-cnn-visualization  -- CNN Visualization
 
-# loop over every image in every class
+# loop over every image and every class in our test dataset
 for clas in range(NUM_CLASS):
 	for img in range(len(test_imgs_normalized)):
 		# feed images into CNN and obtain features
 		features = cnn.predict(test_imgs_normalized[clas][img])
 		knn = KNeighborsClassifier(n_neighbors=5, metric='euclidean')
+		# use the db_imgs_features - need to be transformed first as well
 		knn.fit(features, db_imgs_normalized) # match it with our Database Images S_db
 		pred = knn.predict(features) # predict the descriptors which we obtained from CNN earlier.
 		## check for the same class
