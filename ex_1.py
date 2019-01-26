@@ -376,17 +376,17 @@ for e in range(NUM_EPOCHS):
                 #print("{} degrees don't fall into any of the bins -- error! ".format( len(ang_difference) - (degree_10+degree_180+degree_20+degree_40) ))
                 #print(curr_hist)
 
-                bin = ['10', '20', '40', '180']
-                x_pos = [i for i, _ in enumerate(bin)]
-                plt.style.use('ggplot')
-                plt.bar(x_pos, curr_hist, color='green')
-                plt.xlabel("Angles, $^\circ$")
-                plt.ylabel("Percentage, %")
-                plt.title("Angle histogram")
-                plt.xticks(x_pos, ('<10$^\circ$', '<20$^\circ$', '<40$^\circ$', '<180$^\circ$'))
-                plt.yticks(np.arange(0, max(curr_hist)+1, 5.))
+                #bin = ['10', '20', '40', '180']
+                #x_pos = [i for i, _ in enumerate(bin)]
+                #plt.style.use('ggplot')
+                #plt.bar(x_pos, curr_hist, color='green')
+                #plt.xlabel("Angles, $^\circ$")
+                #plt.ylabel("Percentage, %")
+                #plt.title("Angle histogram")
+                #plt.xticks(x_pos, ('<10$^\circ$', '<20$^\circ$', '<40$^\circ$', '<180$^\circ$'))
+                #plt.yticks(np.arange(0, max(curr_hist)+1, 5.))
                 # plt.show()
-                plt.savefig('hist_' + str(TOTAL_ITER) + '_loss_' + str(np.mean(loss_mean)) + '.png')
+                #plt.savefig('hist_' + str(TOTAL_ITER) + '_loss_' + str(np.mean(loss_mean)) + '.png')
 
                 histo.append(curr_hist)
 
@@ -398,6 +398,7 @@ for e in range(NUM_EPOCHS):
                 print("Unequal shape for Confusion Matrix! Predictions: {}, Truth: {}".format(len(predClass), len(trueClass)))
             else: # print the confusion matrix
                 cm = confusion_matrix(trueClass, predLabels)
+                cm = (cm / cm.astype(np.float).sum(axis=1)) * 100 # normalize to get % of the confusion matrix
                 df_cm = pd.DataFrame(cm, index = [i for i in class_folders], columns = [i for i in class_folders])
                 print(df_cm)
                 plt.figure(figsize = (10, 7))
@@ -405,7 +406,7 @@ for e in range(NUM_EPOCHS):
                 # print("Saving the image in follwing path: {}".format(base_folder))
                 plt.savefig('confusion_m_' + str(TOTAL_ITER) + '.png', bbox_inches='tight')
                 #plt.show()
-                plt.close('all')
+                #plt.close('all')
             #classificationAccuracy = (len(ang_difference) / len(predLabels)) * 100
 
             ##GET DESCRIPTORS of every database image -- batchsize 1!!
