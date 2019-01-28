@@ -358,9 +358,9 @@ for e in range(NUM_EPOCHS):
 
             curr_hist = []
             degree_10   = sum(i <= 10 for i in ang_difference) # count values in our angles which are smaller than 10
-            degree_20   = sum( (i <= 20 and i > 10) for i in ang_difference)
-            degree_40   = sum( (i <= 40 and i > 10) for i in ang_difference)
-            degree_180  = sum( (i <= 180 and i > 10) for i in ang_difference)
+            degree_20   = sum( i <= 20 for i in ang_difference)
+            degree_40   = sum( i <= 40 for i in ang_difference)
+            degree_180  = sum( i <= 180 for i in ang_difference)
 
             # histogram values should be stored in %
             try: # else ZeroDivisionError
